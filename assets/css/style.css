@@ -1,0 +1,9 @@
+.navbar-toggler:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  box-shadow: unset !important;
+}
+
+.form-control::placeholder {
+  color: #757575 !important;
+}

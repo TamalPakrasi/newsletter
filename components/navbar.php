@@ -12,7 +12,7 @@
               class="rounded-circle me-2" width="32" height="32">
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="profileDropdown">
-            <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
+            <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -42,7 +42,7 @@
                 class="rounded-circle me-2" width="32" height="32">
             </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="profileDropdown">
-              <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
+              <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

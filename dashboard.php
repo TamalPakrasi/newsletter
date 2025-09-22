@@ -1,0 +1,81 @@
+<?php
+session_start();
+require_once __DIR__ .  "/utils/message.php";
+
+if (!isset($_SESSION["registered_email"])) {
+  set_message("Invalid Access");
+  header("Location: index.php");
+  exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Newsletter - Profile</title>
+</head>
+
+<body class="bg-dark text-light">
+  <div id="root" class="d-flex flex-column min-vh-100 positon-relative">
+
+    <?php include_once __DIR__ . "/components/navbar.php"; ?>
+
+    <main class="flex-grow-1 bg-black text-light">
+      <section class="container-md py-5" style="max-width: 700px;">
+        <h1 class="h3 fw-bold mb-4 text-center">Profile Dashboard</h1>
+
+        <div class="card bg-dark text-light border-secondary shadow rounded-3 mb-4">
+          <div class="card-body p-4">
+            <h2 class="h5 fw-bold mb-3">Update Name</h2>
+            <form method="post" action="./handlers/updateProfile.php">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control bg-black text-light border-secondary"
+                    id="firstName" name="first_name" placeholder="John" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control bg-black text-light border-secondary"
+                    id="lastName" name="last_name" placeholder="Doe" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card bg-dark text-light border-secondary shadow rounded-3 mb-4">
+          <div class="card-body p-4">
+            <h2 class="h5 fw-bold mb-3">Update Password</h2>
+            <form method="post" action="./handlers/updateProfile.php">
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control bg-black text-light border-secondary"
+                  id="newPassword" name="new_password" required>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control bg-black text-light border-secondary"
+                  id="confirmPassword" name="confirm_password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Update Password</button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <?php include_once __DIR__ . "/components/footer.php"; ?>
+    <?php get_message(); ?>
+  </div>
+
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

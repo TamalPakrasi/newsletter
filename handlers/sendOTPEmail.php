@@ -29,7 +29,7 @@ try {
 
   $otp = rand(100000, 999999);
 
-  $body = file_get_contents(__DIR__ . "/../assets/html/mail.template.html");;
+  $body = file_get_contents(__DIR__ . "/../assets/mail_templates/otp.template.html");
 
   $body = str_replace("{{OTP}}", $otp, $body);
 

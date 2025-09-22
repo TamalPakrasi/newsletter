@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>One-time password</title>
+    <title>Verify your account</title>
   </head>
   <body style="margin: 0; padding: 0; background: #f2f4f6">
     <table
@@ -16,7 +16,6 @@
     >
       <tr>
         <td align="center" style="padding: 20px 10px">
-          <!-- Container (mobile responsive: width 100% but max 600px) -->
           <table
             role="presentation"
             cellpadding="0"
@@ -32,7 +31,6 @@
               font-family: Arial, Helvetica, sans-serif;
             "
           >
-            <!-- Disclaimer header -->
             <tr>
               <td
                 style="
@@ -56,10 +54,8 @@
               </td>
             </tr>
 
-            <!-- Main content -->
             <tr>
-              <td style="padding: 24px 16px; text-align: center">
-                <!-- Heading -->
+              <td style="padding: 28px 20px; text-align: center">
                 <h1
                   style="
                     margin: 0 0 12px;
@@ -69,7 +65,7 @@
                     line-height: 1.4;
                   "
                 >
-                  NewsLetter — One-Time Password
+                  Welcome to NewsLetter 🎉
                 </h1>
                 <p
                   style="
@@ -79,60 +75,66 @@
                     line-height: 1.5;
                   "
                 >
-                  Use the code below to complete your sign-in. The code is valid
-                  for 10 minutes.
+                  Thanks for subscribing! Please confirm your account by
+                  clicking this link
                 </p>
 
-                <!-- OTP box -->
                 <table
                   role="presentation"
                   cellpadding="0"
                   cellspacing="0"
                   border="0"
                   align="center"
-                  style="margin: 18px auto 6px; width: 100%; max-width: 300px"
+                  style="margin: 20px auto 0; width: 100%; max-width: 260px"
                 >
                   <tr>
                     <td
                       align="center"
-                      style="
-                        background: #f7f9fc;
-                        padding: 18px 22px;
-                        border-radius: 6px;
-                        border: 1px solid #e6eef9;
-                      "
+                      bgcolor="#0066cc"
+                      style="border-radius: 6px"
                     >
-                      <p
+                      <a
+                        href="{{VERIFY_LINK}}"
+                        target="_blank"
                         style="
-                          font-size: 28px;
-                          letter-spacing: 4px;
-                          margin: 0;
-                          font-weight: 700;
-                          color: #111;
+                          display: inline-block;
+                          width: 100%;
+                          padding: 12px 0;
+                          text-decoration: none;
+                          border-radius: 6px;
+                          background: #0066cc;
+                          color: #ffffff;
+                          font-weight: 600;
+                          font-size: 16px;
                         "
                       >
-                        {{OTP}}
-                      </p>
+                        Verify My Account
+                      </a>
                     </td>
                   </tr>
                 </table>
 
-                <!-- Security note -->
                 <p
                   style="
-                    margin: 14px 0 0;
-                    font-size: 12px;
-                    color: #999;
+                    margin: 18px 0 0;
+                    font-size: 13px;
+                    color: #666;
                     line-height: 1.4;
+                    word-break: break-all;
                   "
                 >
-                  Do not share this code with anyone. We will never ask you for
-                  this code by phone or email.
+                  If the button doesn’t work, copy and paste this link into your
+                  browser:<br />
+                  <a
+                    href="{{VERIFY_LINK}}"
+                    target="_blank"
+                    style="color: #0066cc"
+                    >{{VERIFY_LINK}}</a
+                  >
                 </p>
               </td>
             </tr>
 
-            <!-- Footer -->
             <tr>
               <td
                 style="
@@ -153,13 +155,12 @@
                   © 2025 NewsLetter. All rights reserved.
                 </p>
                 <p style="margin: 8px 0 0; font-size: 11px; color: #b0b6bd">
-                  If you didn’t request this code, you can safely ignore this
-                  message.
+                  If you didn’t sign up for NewsLetter, you can safely ignore
+                  this message.
                 </p>
               </td>
             </tr>
           </table>
-          <!-- End container -->
         </td>
       </tr>
     </table>

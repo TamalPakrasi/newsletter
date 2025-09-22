@@ -54,8 +54,8 @@
             </form>
 
             <p class="text-center mt-4 mb-0">
-              Don’t have an account?
-              <a href="subscribe.php" class="text-decoration-none text-primary">Sign Up</a>
+              Haven't subscribed yet?
+              <a href="subscribe.php" class="text-decoration-none text-primary">Subscribe</a>
             </p>
           </div>
         </div>

@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once __DIR__ . "/utils/message.php";
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,15 +19,14 @@
     <?php include_once __DIR__ . "/components/navbar.php"; ?>
 
     <main class="flex-grow-1 bg-black text-light">
-      <section class="container-md py-5 text-center">
-        <h1 class="display-3 fw-bold mb-3">Stay Curious. Stay Inspired.</h1>
-        <p class="lead mb-4">Your weekly dose of insights, stories, and ideas delivered straight to your inbox.</p>
-        <form action="./handlers/handleSubscribe.php" method="post" class="d-flex flex-column flex-sm-row justify-content-center gap-2 mx-auto">
-          <input type="email" name="email" class="form-control form-control-lg bg-dark text-light border-light"
-            placeholder="Enter your email">
-          <button type="submit" class="btn btn-primary btn-lg px-4">Subscribe</button>
-        </form>
-      </section>
+
+      <?php
+      if (!isset($_SESSION["registered_email"])) {
+        include __DIR__ . "/components/subscribeForm.php";
+      } else {
+        echo "<div class='mt-5 text-center fw-bold fs-1'>Welcome Subscriber 😊</div>";
+      }
+      ?>
 
       <section class="container-md py-5">
         <h2 class="text-center fw-bold mb-5">What Readers Are Saying</h2>
@@ -70,6 +74,7 @@
     </main>
 
     <?php include_once __DIR__ . "/components/footer.php"; ?>
+    <?php get_message(); ?>
   </div>
 
   <script src="./assets/js/bootstrap.bundle.min.js"></script>

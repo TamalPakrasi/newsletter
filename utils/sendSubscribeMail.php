@@ -17,6 +17,7 @@ function sendSubscibeMail(string $email)
 
   try {
 
+    session_regenerate_id(true);
     if (empty($dotenv)) {
       $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
       $dotenv->load();
@@ -24,7 +25,18 @@ function sendSubscibeMail(string $email)
 
     $body = file_get_contents(__DIR__ . "/../assets/mail_templates/subscribe.template.html");
 
-    $body = str_replace("{{VERIFY_LINK}}", "http://localhost/newsLetter/handlers/verifyAccount.php", $body);
+    $cipher = $_ENV["ENC_CIPHER"];
+    $token = bin2hex(random_bytes(32));
+    $_SESSION["verification_token"] = $token;
+
+    $verification_encryptionKey = hex2bin($_ENV["VERIFICATION_ENC_KEY"]);
+    $verification_iv = hex2bin($_ENV["VERIFICATION_IV"]);
+
+    $token = openssl_encrypt($token, $cipher, $verification_encryptionKey, 0, $verification_iv);
+
+    $token = urlencode($token);
+
+    $body = str_replace("{{VERIFY_LINK}}", "http://localhost/newsLetter/handlers/verifyAccount.php?verify=$token", $body);
 
     //Server settingsoutput
     $mail->isSMTP();                                            //Send using SMTP
@@ -45,7 +57,6 @@ function sendSubscibeMail(string $email)
     $mail->Body    = $body;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-    session_regenerate_id(true);
     $_SESSION["email_in_queue"] = $email;
     $mail->send();
 

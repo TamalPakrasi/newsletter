@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once __DIR__ . "/utils/message.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,13 +26,14 @@
         <p class="lead mb-4">Your weekly dose of insights, stories, and ideas delivered straight to your inbox.</p>
         <form action="./handlers/handleSubscribe.php" method="post" class="d-flex flex-column flex-sm-row justify-content-center gap-2 mx-auto">
           <input type="email" name="email" class="form-control form-control-lg bg-dark text-light border-light"
-            placeholder="Enter your email">
+            placeholder="Enter your email" autocomplete="off">
           <button type="submit" class="btn btn-primary btn-lg px-4">Subscribe</button>
         </form>
       </section>
     </main>
 
     <?php include_once __DIR__ . "/components/footer.php"; ?>
+    <?php get_message(); ?>
   </div>
 
   <script src="./assets/js/bootstrap.bundle.min.js"></script>

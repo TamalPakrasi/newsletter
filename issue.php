@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION["registered_email"])) {
+  session_regenerate_id(true);
+  header("Location: /newsLetter/signin_required.php");
+  exit;
+}
+?>
+
 <?php require_once __DIR__ . "/handlers/fetchIssueById.php"; ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,7 +1,10 @@
 <?php
-
+session_start();
 //Load Composer's autoloader (created by composer, not included with PHPMailer)
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . "/../db/connect.php";
+require_once __DIR__ . "/../utils/checkEmailExists.php";
+require_once __DIR__ . "/../utils/message.php";
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -25,6 +28,10 @@ try {
 
   if (!preg_match_all("/^[^\s@]+@[^\s@]+\.[^\s@]+$/", $to)) {
     throw new Exception("Invalid Email Format");
+  }
+
+  if (!checkEmailExists($conn, $to)) {
+    throw new Exception("Please subscribe before trying to sign in");
   }
 
   $otp = rand(100000, 999999);
@@ -53,8 +60,15 @@ try {
   $mail->Body    = $body;
   $mail->AltBody = "ONE-TIME-PASSWORD: $otp";
 
+  session_regenerate_id(true);
+  $_SESSION["email_in_queue"] = $to;
+  $_SESSION["otp"] = $otp;
   $mail->send();
-  die();
+
+  header("Location: ../enterOTP.php");
+  exit;
 } catch (Exception $e) {
-  die($e->getMessage());
+  set_message($e->getMessage());
+  header("Location: " . $_SERVER["HTTP_REFERER"]);
+  exit;
 }

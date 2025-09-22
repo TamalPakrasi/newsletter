@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once __DIR__ . "/utils/message.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +31,8 @@
                   class="form-control bg-black text-light border-secondary"
                   id="email"
                   name="email"
-                  placeholder="you@example.com">
+                  placeholder="you@example.com"
+                  autocomplete="off">
               </div>
 
               <div class="d-none by_pass">
@@ -63,6 +68,7 @@
     </main>
 
     <?php include_once __DIR__ . "/components/footer.php"; ?>
+    <?php get_message(); ?>
   </div>
 
   <script src="./assets/js/bootstrap.bundle.min.js"></script>

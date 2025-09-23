@@ -56,6 +56,8 @@ if (isset($_SESSION["email_in_queue"]) && isset($_SESSION["verification_token"])
 
     $body = file_get_contents(__DIR__ . "/../assets/mail_templates/account.template.html");
 
+    $body = str_replace("{{LINK}}", $_ENV["BASE_URL"] . "index.php", $body);
+
     sendSuccessMail("Account created successfully", $body, $email);
     session_regenerate_id(true);
     unset($_SESSION["email_in_queue"]);

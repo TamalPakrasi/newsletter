@@ -71,14 +71,14 @@ try {
 
   session_regenerate_id(true);
   $_SESSION["email_in_queue"] = $to;
-  setcookie("one-time-password", $encOTP, time() + 10 * 60, "/");
+  setcookie("one-time-password", $encOTP, time() + 10 * 60, "/", "", true, true);
   $mail->send();
 
   header("Location: ../enterOTP.php");
   exit;
 } catch (Exception $e) {
   if (isset($_COOKIE["one-time-password"])) {
-    setcookie("one-time-password", "", time() - 3600, "/");
+    setcookie("one-time-password", "", time() - 3600, "/", "", true, true);
   }
 
   if (isset($_SESSION["email_in_queue"])) {

@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["email"]) && isset($_P
 
     $body = str_replace("{{LOGIN_TIME}}", date("h:i:s A"), $body);
     $body = str_replace("{{IP_ADDRESS}}", $_SERVER["REMOTE_ADDR"], $body);
+    $body = str_replace("{{LINK}}", $_ENV["BASE_URL"] . "dashboard.php", $body);
 
     sendSuccessMail("Signed in successfully", $body, $email);
 

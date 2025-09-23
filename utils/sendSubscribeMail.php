@@ -37,7 +37,7 @@ function sendSubscibeMail(string $email)
 
     $token = urlencode($token);
 
-    $body = str_replace("{{VERIFY_LINK}}", "http://localhost/newsLetter/handlers/verifyAccount.php?verify=$token", $body);
+    $body = str_replace("{{VERIFY_LINK}}", $_ENV["BASE_URL"] . "handlers/verifyAccount.php?verify=$token", $body);
 
     //Server settingsoutput
     $mail->isSMTP();                                            //Send using SMTP

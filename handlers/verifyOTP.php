@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["email_in_queue"]) 
 
   $otp = (string) $_POST["otp"];
 
-  setcookie("one-time-password", "", time() - 3600, "/");
+  setcookie("one-time-password", "", time() - 3600, "/", "", true, true);
   if (!hash_equals($savedOTP, $otp)) {
     set_message("Invalid OTP");
     header("Location: ../signin.php");
@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["email_in_queue"]) 
 
   $body = str_replace("{{LOGIN_TIME}}", date("h:i:s A"), $body);
   $body = str_replace("{{IP_ADDRESS}}", $_SERVER["REMOTE_ADDR"], $body);
+  $body = str_replace("{{LINK}}", $_ENV["BASE_URL"] . "dashboard.php", $body);
 
   sendSuccessMail("Signed in successfully", $body, $email);
 

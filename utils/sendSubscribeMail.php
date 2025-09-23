@@ -63,6 +63,12 @@ function sendSubscibeMail(string $email)
     header("Location: /newsLetter/wait.php");
     die();
   } catch (Exception $e) {
+    if (isset($_SESSION["verification_token"])) {
+      unset($_SESSION["verification_token"]);
+    }
+    if (isset($_SESSION["email_in_queue"])) {
+      unset($_SESSION["email_in_queue"]);
+    }
     die($e->getMessage());
   }
 }

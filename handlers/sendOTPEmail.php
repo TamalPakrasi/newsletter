@@ -77,6 +77,13 @@ try {
   header("Location: ../enterOTP.php");
   exit;
 } catch (Exception $e) {
+  if (isset($_COOKIE["one-time-password"])) {
+    setcookie("one-time-password", "", time() - 3600, "/");
+  }
+
+  if (isset($_SESSION["email_in_queue"])) {
+    unset($_SESSION["email_in_queue"]);
+  }
   set_message($e->getMessage());
   header("Location: " . $_SERVER["HTTP_REFERER"]);
   exit;

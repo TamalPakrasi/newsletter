@@ -1,11 +1,14 @@
 <?php
 
 session_start();
+date_default_timezone_set("Asia/Kolkata");
+
 require_once __DIR__ . "/../db/connect.php";
 require_once __DIR__ . "/../utils/checkEmailExists.php";
 require_once __DIR__ . "/../utils/message.php";
 require_once __DIR__ . "/../utils/getPass.php";
 require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../utils/sendSuccessMail.php";
 
 use Dotenv\Dotenv;
 
@@ -42,6 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["email"]) && isset($_P
       throw new Exception("Invalid Password");
     }
 
+    $body = file_get_contents(__DIR__ . "/../assets/mail_templates/signin.template.html");
+
+    $body = str_replace("{{LOGIN_TIME}}", date("h:i:s A"), $body);
+    $body = str_replace("{{IP_ADDRESS}}", $_SERVER["REMOTE_ADDR"], $body);
+
+    sendSuccessMail("Signed in successfully", $body, $email);
+
     $username = getUserName($conn, $email);
 
     session_regenerate_id(true);
@@ -53,6 +63,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["email"]) && isset($_P
     header("Location: ../index.php");
     exit;
   } catch (Exception $e) {
+    if (isset($_SESSION["registered_email"])) {
+      unset($_SESSION["registered_email"]);
+    }
+
+    if (isset($_SESSION["username"])) {
+      unset($_SESSION["username"]);
+    }
     set_message($e->getMessage());
     header("Location: " . $_SERVER["HTTP_REFERER"]);
     exit;

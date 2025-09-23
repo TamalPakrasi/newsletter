@@ -5,6 +5,7 @@ session_start();
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../db/connect.php";
 require_once __DIR__ . "/../utils/message.php";
+require_once __DIR__ . "/../utils/sendSuccessMail.php";
 
 use Dotenv\Dotenv;
 
@@ -40,7 +41,7 @@ if (isset($_SESSION["email_in_queue"]) && isset($_SESSION["verification_token"])
 
   if (!$stmt) {
     set_message("Something went wrong, Try Again!");
-    header("Location: /NewsLetter/subscribe.php");
+    header("Location: ../subscribe.php");
     die();
   }
 
@@ -50,14 +51,18 @@ if (isset($_SESSION["email_in_queue"]) && isset($_SESSION["verification_token"])
 
   if ($stmt->affected_rows === 0) {
     set_message("Something went wrong, Try Again!");
-    header("Location: /NewsLetter/subscribe.php");
+    header("Location: ../subscribe.php");
   } else {
+
+    $body = file_get_contents(__DIR__ . "/../assets/mail_templates/account.template.html");
+
+    sendSuccessMail("Account created successfully", $body, $email);
     session_regenerate_id(true);
     unset($_SESSION["email_in_queue"]);
     unset($_SESSION["verification_token"]);
     $_SESSION["registered_email"] = $email;
     set_message("Subscribed and Signed in successfully");
-    header("Location: /NewsLetter/index.php");
+    header("Location: ../index.php");
   }
   exit;
 }

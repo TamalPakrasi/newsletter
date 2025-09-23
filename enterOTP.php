@@ -36,10 +36,13 @@
               <button type="submit" class="btn btn-primary w-100 mt-4">Verify</button>
             </form>
 
-            <!-- <p class="mt-4 mb-0">
+            <form class="mt-4 mb-0" action="./handlers/sendOTPEmail.php" method="POST">
               Didn’t get the code?
-              <a href="#" class="text-decoration-none text-primary">Resend OTP</a>
-            </p> -->
+              <input type="hidden" name="email" value="<?php echo $_SESSION["email_in_queue"]; ?>">
+              <button type="submit" class="text-decoration-none text-primary bg-transparent border-0">
+                Resend OTP
+              </button>
+            </form>
           </div>
         </div>
       </section>

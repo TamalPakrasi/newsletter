@@ -1,11 +1,13 @@
 <?php
 
 session_start();
+date_default_timezone_set("Asia/Kolkata");
 
 require_once __DIR__ . "/../db/connect.php";
 require_once __DIR__ . "/../utils/message.php";
 require_once __DIR__ . "/../utils/getPass.php";
 require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../utils/sendSuccessMail.php";
 
 use Dotenv\Dotenv;
 
@@ -24,14 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["email_in_queue"]) 
 
   $otp = (string) $_POST["otp"];
 
+  setcookie("one-time-password", "", time() - 3600, "/");
   if (!hash_equals($savedOTP, $otp)) {
     set_message("Invalid OTP");
     header("Location: ../signin.php");
     exit;
   }
-  setcookie("one-time-password", "", time() - 3600, "/");
 
   $email = $_SESSION["email_in_queue"];
+
+  $body = file_get_contents(__DIR__ . "/../assets/mail_templates/signin.template.html");
+
+  $body = str_replace("{{LOGIN_TIME}}", date("h:i:s A"), $body);
+  $body = str_replace("{{IP_ADDRESS}}", $_SERVER["REMOTE_ADDR"], $body);
+
+  sendSuccessMail("Signed in successfully", $body, $email);
 
   $username = getUserName($conn, $email);
 

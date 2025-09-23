@@ -24,7 +24,7 @@
 
             <p class="mt-4 mb-0">
               Didn’t receive the email?
-              <a href="./handlers//handleSubscribe.php" class="text-decoration-none text-primary">Resend verification link</a>
+              <a href="./handlers/handleSubscribe.php" class="text-decoration-none text-primary">Resend verification link</a>
             </p>
           </div>
         </div>

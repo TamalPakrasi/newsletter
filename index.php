@@ -2,7 +2,7 @@
 session_start();
 require_once __DIR__ . "/utils/message.php";
 
-$heading = isset($_SESSION["username"]) ? "Back " . htmlspecialchars($_SESSION["username"]) : "Subscriber";;
+$heading = isset($_SESSION["username"]) ? htmlspecialchars($_SESSION["username"]) : "Subscriber";
 ?>
 <!DOCTYPE html>
 <html lang="en">

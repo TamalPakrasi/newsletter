@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION["registered_email"])) {
   session_regenerate_id(true);
-  header("Location: /newsLetter/signin_required.php");
+  header("Location: signin_required.php");
   exit;
 }
 ?>

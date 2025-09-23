@@ -6,7 +6,8 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader (created by composer, not included with PHPMailer)
-require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . "/../utils/message.php";
 
 use Dotenv\Dotenv;
 
@@ -60,7 +61,7 @@ function sendSubscibeMail(string $email)
     $_SESSION["email_in_queue"] = $email;
     $mail->send();
 
-    header("Location: /newsLetter/wait.php");
+    header("Location: ../wait.php");
     die();
   } catch (Exception $e) {
     if (isset($_SESSION["verification_token"])) {
@@ -69,6 +70,9 @@ function sendSubscibeMail(string $email)
     if (isset($_SESSION["email_in_queue"])) {
       unset($_SESSION["email_in_queue"]);
     }
-    die($e->getMessage());
+
+    set_message($e->getMessage());
+    header("Location: ../index.php");
+    exit;
   }
 }

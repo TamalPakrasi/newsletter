@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once __DIR__ . "/utils/message.php";
+
+$heading = isset($_SESSION["username"]) ? "Back " . htmlspecialchars($_SESSION["username"]) : "Subscriber";;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +26,7 @@ require_once __DIR__ . "/utils/message.php";
       if (!isset($_SESSION["registered_email"])) {
         include __DIR__ . "/components/subscribeForm.php";
       } else {
-        echo "<div class='mt-5 text-center fw-bold fs-1'>Welcome Subscriber 😊</div>";
+        echo "<div class='mt-5 text-center fw-bold fs-1'>Welcome " . $heading . " 😊</div>";
       }
       ?>
 

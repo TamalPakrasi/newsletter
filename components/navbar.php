@@ -1,3 +1,13 @@
+<?php
+if (isset($_SESSION["username"])) {
+  $username = $_SESSION["username"];
+  list($f_name, $l_name) = explode(" ", $username, 2);
+  $initial = $f_name[0] . $l_name[0];
+
+  $bgs = ["success", "primary", "danger", "warning"];
+  $color = $bgs[array_rand($bgs)];
+}
+?>
 <nav class="navbar navbar-expand-md navbar-dark bg-black sticky-top border-bottom border-secondary">
   <div class="container">
     <a class="navbar-brand fw-bold" href="index.php">📰 NewsLetter</a>
@@ -8,8 +18,12 @@
         <div class="nav-item dropdown d-inline-block d-md-none">
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU0a0iDtUPUzs0GFM6DSuovK0uOE4-Sc40Pg&s" alt="Profile"
-              class="rounded-circle me-2" width="32" height="32">
+            <?php if (!isset($initial)) { ?>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU0a0iDtUPUzs0GFM6DSuovK0uOE4-Sc40Pg&s" alt="Profile"
+                class="rounded-circle me-2" width="32" height="32">
+            <?php } else { ?>
+              <div class="bg-<?php echo $color; ?> rounded-circle p-2 d-flex justify-content-center align-items-center text-light fw-semibold" style="height: 2rem; width: 2rem"><?php echo htmlspecialchars(strtoupper($initial)); ?></div>
+            <?php } ?>
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="profileDropdown">
             <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
@@ -38,8 +52,12 @@
           <li class="nav-item dropdown d-none d-md-block">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU0a0iDtUPUzs0GFM6DSuovK0uOE4-Sc40Pg&s" alt="Profile"
-                class="rounded-circle me-2" width="32" height="32">
+              <?php if (!isset($initial)) { ?>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU0a0iDtUPUzs0GFM6DSuovK0uOE4-Sc40Pg&s" alt="Profile"
+                  class="rounded-circle me-2" width="32" height="32">
+              <?php } else { ?>
+                <div class="bg-<?php echo $color; ?> rounded-circle p-2 d-flex justify-content-center align-items-center text-light fw-semibold" style="height: 2rem; width: 2rem"><?php echo htmlspecialchars(strtoupper($initial)); ?></div>
+              <?php } ?>
             </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="profileDropdown">
               <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>

@@ -44,9 +44,8 @@ require_once __DIR__ . "/utils/message.php";
                   placeholder="*******">
               </div>
 
-              <div class="d-flex justify-content-between align-items-center d-none by_pass">
-                <a href="" class="text-decoration-none text-primary">Set New Password</a>
-                <button id="sign_in_otp" class="bg-transparent border-0 text-decoration-none text-primary">Sign In using OTP instead</button>
+              <div class="d-none by_pass">
+                <button id="sign_in_otp" class="bg-transparent border-0 text-decoration-none text-primary float-end">Sign In using OTP instead</button>
               </div>
 
               <div class="by_otp">

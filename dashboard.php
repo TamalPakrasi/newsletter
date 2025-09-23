@@ -27,6 +27,23 @@ if (!isset($_SESSION["registered_email"])) {
     <main class="flex-grow-1 bg-black text-light">
       <section class="container-md py-5" style="max-width: 700px;">
         <h1 class="h3 fw-bold mb-4 text-center">Profile Dashboard</h1>
+        <div class="card bg-dark text-light border-secondary shadow rounded-3 mb-4">
+          <div class="card-body p-4">
+            <h2 class="h5 fw-bold mb-3">Profile Summary</h2>
+            <div>
+              <label for="f_name" style="white-space: nowrap;">First Name</label>
+              <input type="text" id="f_name" class="form-control bg-black text-light border-secondary mt-2" readonly value="<?php echo isset($_SESSION["username"]) ? explode(" ", $_SESSION["username"], 2)[0] : "NOT SET" ?>">
+            </div>
+            <div class="my-3">
+              <label for="l_name" style="white-space: nowrap;">Last Name</label>
+              <input type="text" id="l_name" class="form-control bg-black text-light border-secondary mt-2" readonly value="<?php echo isset($_SESSION["username"]) ? explode(" ", $_SESSION["username"], 2)[1] : "NOT SET" ?>">
+            </div>
+            <div>
+              <label for="email" style="white-space: nowrap;">Email Address</label>
+              <input type="email" id="email" class="form-control bg-black text-light border-secondary mt-2" readonly value="<?php echo $_SESSION["registered_email"]; ?>">
+            </div>
+          </div>
+        </div>
 
         <div class="card bg-dark text-light border-secondary shadow rounded-3 mb-4">
           <div class="card-body p-4">
@@ -36,12 +53,12 @@ if (!isset($_SESSION["registered_email"])) {
                 <div class="col-md-6">
                   <label for="firstName" class="form-label">First Name</label>
                   <input type="text" class="form-control bg-black text-light border-secondary"
-                    id="firstName" name="first_name" placeholder="John" required>
+                    id="firstName" name="first_name" placeholder="John" autocomplete="off" required>
                 </div>
                 <div class="col-md-6">
                   <label for="lastName" class="form-label">Last Name</label>
                   <input type="text" class="form-control bg-black text-light border-secondary"
-                    id="lastName" name="last_name" placeholder="Doe" required>
+                    id="lastName" name="last_name" placeholder="Doe" autocomplete="off" required>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
@@ -56,12 +73,12 @@ if (!isset($_SESSION["registered_email"])) {
               <div class="mb-3">
                 <label for="newPassword" class="form-label">New Password</label>
                 <input type="password" class="form-control bg-black text-light border-secondary"
-                  id="newPassword" name="new_password" required>
+                  id="newPassword" name="new_password" autocomplete="off" required>
               </div>
               <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                 <input type="password" class="form-control bg-black text-light border-secondary"
-                  id="confirmPassword" name="confirm_password" required>
+                  id="confirmPassword" name="confirm_password" autocomplete="off" required>
               </div>
               <button type="submit" class="btn btn-primary">Update Password</button>
             </form>

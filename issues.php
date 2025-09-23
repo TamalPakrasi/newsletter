@@ -2,6 +2,8 @@
 session_start();
 require_once __DIR__ . "/utils/message.php";
 require_once __DIR__ . "/handlers/fetchIssues.php";
+
+$heading = isset($_SESSION["username"]) ? "Back " . htmlspecialchars($_SESSION["username"]) : "Subscriber";
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ require_once __DIR__ . "/handlers/fetchIssues.php";
       if (!isset($_SESSION["registered_email"])) {
         include __DIR__ . "/components/subscribeForm.php";
       } else {
-        echo "<div class='mt-5 text-center fw-bold fs-1'>Welcome Subscriber 😊</div>";
+        echo "<div class='mt-5 text-center fw-bold fs-1'>Welcome " . $heading . " 😊</div>";
       }
       ?>
 

@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION["registered_email"]
 
     if ($stmt->affected_rows > 0) {
       set_message("profile updated successfully");
-      // $_SESSION["username"] = $firstName . " " . $lastName;
+      $_SESSION["username"] = $firstName . " " . $lastName;
       header("Location: ../index.php");
     } else {
       set_message("Something went wrong! try again");

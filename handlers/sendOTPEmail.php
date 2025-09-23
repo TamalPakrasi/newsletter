@@ -13,8 +13,10 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . "/../");
-$dotenv->load();
+if (empty($dotenv)) {
+  $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
+  $dotenv->load();
+}
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -60,9 +62,16 @@ try {
   $mail->Body    = $body;
   $mail->AltBody = "ONE-TIME-PASSWORD: $otp";
 
+  $cipher = $_ENV["ENC_CIPHER"];
+  $otp_encryptionKey = hex2bin($_ENV["OTP_ENC_KEY"]);
+  $otp_iv = hex2bin($_ENV["OTP_IV"]);
+
+  $otpStr = (string) $otp;
+  $encOTP = openssl_encrypt($otpStr, $cipher, $otp_encryptionKey, 0, $otp_iv);
+
   session_regenerate_id(true);
   $_SESSION["email_in_queue"] = $to;
-  $_SESSION["otp"] = $otp;
+  setcookie("one-time-password", $encOTP, time() + 10 * 60, "/");
   $mail->send();
 
   header("Location: ../enterOTP.php");
